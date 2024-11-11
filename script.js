@@ -4,7 +4,7 @@ let currentWeekStart = new Date();
 let selectedDate = null;
 
 // URL de la imagen del logo (actualizada)
-const LOGO_URL = 'https://i.ibb.co/dczyxrp/Seguridad.png';
+const LOGO_URL = 'https://i.ibb.co/KGnw9tt/45x18.png';
 
 const holidays = {
     2024: [
