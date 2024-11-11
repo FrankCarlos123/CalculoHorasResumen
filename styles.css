@@ -1,0 +1,419 @@
+:root {
+    --background: #121212;
+    --surface: #1e1e1e;
+    --surface-hover: #2d2d2d;
+    --primary: #ff9800;
+    --primary-dark: #f57c00;
+    --secondary: #4caf50;
+    --secondary-dark: #388e3c;
+    --text: #ffffff;
+    --text-secondary: #a0a0a0;
+    --day-bg: #2d2d2d;
+    --day-text: #ffffff;
+    --free-day-bg: #2d2d2d;
+    --weekend-bg: #ff4545;
+    --border-color: #333333;
+    --modal-overlay: rgba(0, 0, 0, 0.8);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--surface);
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.nav-button {
+    background-color: var(--primary);
+    border: none;
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: black;
+}
+
+.shift-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.shift-card {
+    background-color: var(--surface);
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+    transition: background-color 0.2s;
+}
+
+.shift-card:hover {
+    background-color: var(--surface-hover);
+}
+
+.date-box {
+    background-color: var(--day-bg);
+    color: var(--day-text);
+    border-radius: 8px;
+    padding: 0.5rem;
+    width: 80px;
+    min-width: 80px;
+    height: 65px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.date-box.weekend {
+    background-color: var(--weekend-bg);
+}
+
+.date-box .day-number {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.date-box .day-name {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.shift-details {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.shift-time-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.shift-time {
+    font-weight: bold;
+}
+
+.break-time {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.logo-container {
+    width: 25mm;
+    height: 11mm;
+    border: 1px solid #ff4545;
+    border-radius: 4px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.logo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--modal-overlay);
+    z-index: 1000;
+}
+
+.modal-content {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--surface);
+    padding: 1.5rem;
+    border-radius: 20px 20px 0 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.time-inputs {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.time-input {
+    flex: 1;
+}
+
+.time-input input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: var(--day-bg);
+    color: var(--text);
+}
+
+.time-input label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+}
+
+.break-inputs {
+    margin: 1rem 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.break-inputs h4 {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.modal-button {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.save-button {
+    background-color: var(--primary);
+    color: black;
+}
+
+.cancel-button {
+    background-color: var(--free-day-bg);
+    color: var(--text);
+}
+
+.free-day-toggle {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text);
+}
+
+.totals-card {
+    cursor: default !important;
+}
+
+.totals-row {
+    display: grid;
+    grid-template-columns: minmax(100px, 1fr) auto auto auto;
+    gap: 0.5rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border-color);
+    align-items: center;
+}
+
+.total-label {
+    min-width: auto;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.total-value {
+    min-width: auto;
+    text-align: right;
+    white-space: nowrap;
+    color: #fff;
+}
+
+.rate-input {
+    width: 50px;
+    text-align: center;
+    background: var(--surface-hover);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 4px;
+    color: var(--primary);
+    font-size: 0.9rem;
+    margin: 0;
+    font-weight: bold;
+}
+
+.money-earned {
+    min-width: auto;
+    text-align: right;
+    color: var(--primary);
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.summary-buttons {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.summary-section {
+    flex: 1;
+    position: relative;
+}
+
+.summary-button {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.2s;
+}
+
+.summary-button.monthly {
+    background-color: #2196f3;
+}
+
+.summary-button.yearly {
+    background-color: var(--secondary);
+}
+
+.summary-button:hover {
+    opacity: 0.9;
+}
+
+.month-selector,
+.year-selector {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--surface);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+    border: 1px solid var(--border-color);
+    z-index: 100;
+}
+
+.month-selector.active,
+.year-selector.active {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.month-selector select,
+.year-selector select {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--day-bg);
+    color: var(--text);
+    font-size: 0.9rem;
+}
+
+.month-selector button,
+.year-selector button {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--primary);
+    color: black;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.month-selector button:hover,
+.year-selector button:hover {
+    opacity: 0.9;
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0.5rem;
+    }
+
+    .shift-card {
+        padding: 0.75rem;
+    }
+
+    .date-box {
+        width: 60px;
+        min-width: 60px;
+        height: 55px;
+    }
+
+    .summary-buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .logo-container {
+        width: 20mm;
+        height: 9mm;
+    }
+
+    .month-selector,
+    .year-selector {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 20px 20px 0 0;
+        padding: 1.5rem;
+    }
+
+    .shift-details {
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .logo-container {
+        width: 18mm;
+        height: 8mm;
+    }
+}
